@@ -12,7 +12,7 @@ python3 main.py create_json
 
 `xd` = description
 
-`id` = task id
+`1` = task id
 
 For help:
 `python3 main.py -h`
