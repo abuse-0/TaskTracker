@@ -1,0 +1,38 @@
+https://roadmap.sh/projects/task-tracker
+Нельзя использовать внешние фрейморки и библиотеки
+Нужна обработка ошибок
+
+юзать будем argparse, т.к это встроенный cli прикол
+https://www.youtube.com/watch?v=792UnrSxD6w
+
+Каждая задача должна иметь свойства: 
+    id: Уникальный идентификатор задачи
+    description: Краткое описание задачи
+    status: Статус задачи ( todo, in-progress, done)
+    createdAt: Дата и время создания задачи
+    updatedAt: Дата и время последнего обновления задачи.
+Обязательно добавьте эти свойства в файл JSON при добавлении новой задачи и обновите их при обновлении задачи.
+
+[x] Создать файл json
+[x] Реализовать добавление, обновление и удаление таски
+    add "Buy groceries" # Output: Task added successfully (ID: 1)
+    update 1 "Buy groceries and cook dinner"
+    delete 1
+[x] Возможность отметить таску как выполняемую или выполненную
+    mark-in-progress 1
+    mark-done 1
+[x] Возможность вывести все таски(possible in 1 function)
+    list
+[x] Возможность вывести таски с фильтром: выполненные, невыполненные, в процессе
+    list done
+    list todo
+    list in-progress
+
+[I can't] review with oop(data in add_task it's state) use class Task and class TaskManager, that's all
+
+[x] instead of --add i want write add
+
+[] Вместо python3 main.py add "Buy groceries" я хочу вводить task-cli add "Buy groceries"
+
+[] в конце на гит дропни, как ваще воркает это
+
