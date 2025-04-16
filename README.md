@@ -36,9 +36,9 @@ python3 main.py mark-done 1
 View task:
 ```
 python3 main.py list ''
-list 'todo'
-list 'in-progress'
-list 'done'
+python3 main.py list 'todo'
+python3 main.py list 'in-progress'
+python3 main.py list 'done'
 ```
 ## www
 
