@@ -21,7 +21,7 @@ Add task:
 `python3 main.py add 'xd'`
 
 Update task:
-`python3 main.py update 1 'xd'`
+`python3 main.py update 1 'new xd'`
 
 Delete task:
 `python3 main.py delete 1`
