@@ -18,7 +18,7 @@ For help:
 `python3 main.py -h`
 
 Add task:
-`python3 main.py add ''`
+`python3 main.py add 'xd'`
 
 Update task:
 `python3 main.py update 1 'xd'`
