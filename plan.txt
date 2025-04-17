@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=792UnrSxD6w
 
 [x] Вместо python3 main.py add "Buy groceries" я хочу вводить task-cli add "Buy groceries"
 
-[?] review with oop(data in add_task it's state) use class Task and class TaskManager, that's all
+[x] review with oop(data in add_task it's state) use class Task and class TaskManager, that's all
 
 [x] в конце на гит readme дропни, как ваще воркает это
 
