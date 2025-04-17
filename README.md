@@ -1,7 +1,9 @@
 # Install
-`apt install python3.12-venv` - if not install
+`git clone https://github.com/abuse-0/TaskTracker`
 
-`pip show setuptools` - not necessary, but it show an error without it
+`cd cli`
+
+`apt install python3.12-venv` - if not install
 
 `python3 -m venv venv`
 

@@ -102,15 +102,15 @@ class TaskManager:
             print("Task not found.")
 
 
-    def delete_task(self):
+    def delete_task(self, id):
         pass
 
 
-    def change_task_status(self):
+    def change_task_status(self, id):
         pass
 
 
-    def show_task(self):
+    def show_task(self, filter):
         pass
 
 
