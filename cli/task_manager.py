@@ -122,7 +122,7 @@ class TaskManager:
         if task:
             self.tasks.remove(task)
             self.save_tasks()
-            print(f"Task status updated (ID: {id})")
+            print(f"Task deleted (ID: {id})")
         else:
             print("Task not found.")
 
