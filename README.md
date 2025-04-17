@@ -15,6 +15,10 @@
 
 # How to use
 
+`cd cli`
+
+`source venv/bin/activate`
+
 ```python3
 # Adding a new task
 task-cli add "Buy groceries"

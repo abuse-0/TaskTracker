@@ -9,7 +9,7 @@
 # python3 main.py list ''/'todo'/'in-progress'/'done'
 
 import argparse
-import functions as func
+import task_manager as tm
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest="command")
@@ -59,36 +59,38 @@ def main():
 # Надо open(always executed)
     args = parser.parse_args() 
     print(args)
-    func.create_json()
+    tm.create_json()
+
+    manager = tm.TaskManager()
 # close
     if args.command == "add":
         description = args.description
-        func.add_task(description)
+        manager.add_task(description)
     elif args.command == "update":
         id = args.id
         description = args.description
-        func.update_task(id, description)
+        manager.update_task(id, description)
     elif args.command == "delete":
         id = args.id
-        func.delete_task(id)
+        manager.delete_task(id)
     elif args.command == "mark-todo":
         id = args.id
-        func.change_task_status(id, "todo")
+        manager.change_task_status(id, "todo")
     elif args.command == "mark-in-progress":
         id = args.id
-        func.change_task_status(id, "in-progress")
+        manager.change_task_status(id, "in-progress")
     elif args.command == "mark-done":
         id = args.id
-        func.change_task_status(id, "done")
+        manager.change_task_status(id, "done")
     elif args.command == "list":
         if args.filter == "todo":
-            func.show_tasks("todo")
+            manager.show_tasks("todo")
         elif args.filter == "in-progress":
-            func.show_tasks("in-progress")
+            manager.show_tasks("in-progress")
         elif args.filter == "done":
-            func.show_tasks("done")
+            manager.show_tasks("done")
         else:
-            func.show_tasks()
+            manager.show_tasks()
 
 
 if __name__ == "__main__":

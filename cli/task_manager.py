@@ -58,7 +58,7 @@ class Task:
 class TaskManager:
     def __init__(self):
         self.filepath = "data.json"
-        self.tasks = self.load_tasks()
+        self.tasks = self.load_tasks() # [<__main__.Task object at 0x742ea0175f70>, <__main__.Task object at 0x742ea01763f0>...]
 
 
     # return [<__main__.Task object at 0x742ea0175f70>, <__main__.Task object at 0x742ea01763f0>...]
@@ -83,12 +83,26 @@ class TaskManager:
             json.dump(tasks_list, f, ensure_ascii=False, indent=4)
     
 
-    def add_task(self):
-        pass
-
-
     def get_next_id(self):
-        pass
+        if self.tasks:
+            return self.tasks[-1].id+1
+        else:
+            return 1
+
+
+    def find_task(self, id):
+        for task in self.tasks:
+            if task.id == id:
+                return task
+        return None
+
+
+    def add_task(self, description):
+        id = self.get_next_id()
+        task = Task(id, description)
+
+        self.tasks.append(task)
+        self.save_tasks()
 
 
     def update_task(self, id, description):
@@ -103,22 +117,46 @@ class TaskManager:
 
 
     def delete_task(self, id):
-        pass
+        task = self.find_task(id)
+
+        if task:
+            self.tasks.remove(task)
+            self.save_tasks()
+            print(f"Task status updated (ID: {id})")
+        else:
+            print("Task not found.")
 
 
-    def change_task_status(self, id):
-        pass
+    def change_task_status(self, id, status):
+        task = self.find_task(id)
+
+        if task:
+            task.change_status(status)
+            self.save_tasks()
+            print(f"Task status updated (ID: {id})")
+        else:
+            print("Task not found.")
 
 
-    def show_task(self, filter):
-        pass
-
-
-    def find_task(self, id):
-        for task in self.tasks:
-            if task.id == id:
-                return task
-        return None
+    def show_tasks(self, filter=None):
+        if filter == None:
+            for task in self.tasks:
+                print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
+        elif filter == "todo":
+            for task in self.load_tasks():
+                if task.status == "todo":
+                    print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
+        elif filter == "in-progress":
+            for task in self.load_tasks():
+                if task.status == "in-progress":
+                    print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
+        elif filter == "done":
+            for task in self.load_tasks():
+                if task.status == "done":
+                    print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
 
 # manager.update_task(1, '123') # worked
-# manager = TaskManager()
+# manager.add_task("negr") # worked
+# manager.change_task_status(1, "done") # worked
+# manager.show_task() # worked
+# manager.delete_task(1) # worked
