@@ -1,3 +1,4 @@
+from typing import Optional # Value or None
 from time import strftime
 import json
 import os
@@ -19,18 +20,18 @@ class Task:
         self.updatedAt = updatedAt
 
     
-    def update_description(self, new_description):
+    def update_description(self, new_description:str) -> None: 
         self.description = new_description
         self.updatedAt = strftime("%Y-%m-%d %H:%M:%S")
 
 
-    def change_status(self, new_status):
+    def change_status(self, new_status:str) -> None:
         self.status = new_status
         self.updatedAt = strftime("%Y-%m-%d %H:%M:%S")
     
 
     # return dict with class values
-    def to_dict(self):
+    def to_dict(self) -> dict:
         result = {
             "id": self.id,
             "description": self.description,
@@ -43,7 +44,7 @@ class Task:
         
     # return a class with the passed values
     @classmethod
-    def from_dict(cls, json_task):
+    def from_dict(cls, json_task: dict) -> "Task": # return class Task
         task = cls(
             id=json_task["id"],
             description=json_task["description"],
@@ -62,7 +63,7 @@ class TaskManager:
 
 
     # return [<__main__.Task object at 0x742ea0175f70>, <__main__.Task object at 0x742ea01763f0>...]
-    def load_tasks(self):
+    def load_tasks(self) -> list["Task"]: # return list with classes Task
         tasks_list = []
 
         with open(self.filepath) as f:
@@ -73,7 +74,7 @@ class TaskManager:
         
 
     # save tasks to json
-    def save_tasks(self):
+    def save_tasks(self) -> None:
         with open(self.filepath, 'w', encoding='utf-8') as f:
             tasks_list = []
 
@@ -83,21 +84,21 @@ class TaskManager:
             json.dump(tasks_list, f, ensure_ascii=False, indent=4)
     
 
-    def get_next_id(self):
+    def get_next_id(self) -> int:
         if self.tasks:
             return self.tasks[-1].id+1
         else:
             return 1
 
 
-    def find_task(self, id):
+    def find_task(self, id:int) -> Optional["Task"]: # return class Task or None
         for task in self.tasks:
             if task.id == id:
                 return task
         return None
 
 
-    def add_task(self, description):
+    def add_task(self, description: str) -> None:
         id = self.get_next_id()
         task = Task(id, description)
 
@@ -105,7 +106,7 @@ class TaskManager:
         self.save_tasks()
 
 
-    def update_task(self, id, description):
+    def update_task(self, id: int, description: str) -> None:
         task = self.find_task(id)
 
         if task:
@@ -116,7 +117,7 @@ class TaskManager:
             print("Task not found.")
 
 
-    def delete_task(self, id):
+    def delete_task(self, id: int) -> None:
         task = self.find_task(id)
 
         if task:
@@ -127,7 +128,7 @@ class TaskManager:
             print("Task not found.")
 
 
-    def change_task_status(self, id, status):
+    def change_task_status(self, id: int, status: str) -> None:
         task = self.find_task(id)
 
         if task:
@@ -138,20 +139,20 @@ class TaskManager:
             print("Task not found.")
 
 
-    def show_tasks(self, filter=None):
+    def show_tasks(self, filter: str=None) -> None:
         if filter == None:
             for task in self.tasks:
                 print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
         elif filter == "todo":
-            for task in self.load_tasks():
+            for task in self.tasks:
                 if task.status == "todo":
                     print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
         elif filter == "in-progress":
-            for task in self.load_tasks():
+            for task in self.tasks:
                 if task.status == "in-progress":
                     print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
         elif filter == "done":
-            for task in self.load_tasks():
+            for task in self.tasks:
                 if task.status == "done":
                     print(task.id, task.description, task.status, task.createdAt, task.updatedAt)
 
