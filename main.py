@@ -48,46 +48,48 @@ mark_done = subparsers.add_parser("mark-done",
 mark_done.add_argument("id", type=int)
 
 
-# need fix??? instead of list '' need list
-# instead of list 'done' need list done
 list_parser = subparsers.add_parser("list",
-                                    help="show tasks with filter| example: list '' or list 'todo' or list 'in-progress' or list 'done'")
-list_parser.add_argument("filter", type=str, choices=["", "todo", "in-progress", "done"]) 
-
-
-mark_done = subparsers.add_parser("create_json", 
-                                  help="create json for store data")
-# Надо
-
-args = parser.parse_args() 
-print(args)
+                                    help="view items | example: list / list todo / list in-progress / list done")
+list_parser.add_argument("filter", nargs="?",choices=["todo", "in-progress", "done"]) 
 
 
 # commands 
 
-if args.command == "add":
-    description = args.description
-    func.add_task(description)
-elif args.command == "update":
-    id = args.id
-    description = args.description
-    func.update_task(id, description)
-elif args.command == "delete":
-    id = args.id
-    func.delete_task(id)
-elif args.command == "mark-todo":
-    id = args.id
-    func.change_task_status(id, "todo")
-elif args.command == "mark-in-progress":
-    id = args.id
-    func.change_task_status(id, "in-progress")
-elif args.command == "mark-done":
-    id = args.id
-    func.change_task_status(id, "done")
-elif args.command == "list":
-    filter = args.filter
-    func.show_tasks(filter)
-elif args.command == "create_json":
+def main():
+# Надо open(always executed)
+    args = parser.parse_args() 
+    print(args)
     func.create_json()
+# close
+    if args.command == "add":
+        description = args.description
+        func.add_task(description)
+    elif args.command == "update":
+        id = args.id
+        description = args.description
+        func.update_task(id, description)
+    elif args.command == "delete":
+        id = args.id
+        func.delete_task(id)
+    elif args.command == "mark-todo":
+        id = args.id
+        func.change_task_status(id, "todo")
+    elif args.command == "mark-in-progress":
+        id = args.id
+        func.change_task_status(id, "in-progress")
+    elif args.command == "mark-done":
+        id = args.id
+        func.change_task_status(id, "done")
+    elif args.command == "list":
+        if args.filter == "todo":
+            func.show_tasks("todo")
+        elif args.filter == "in-progress":
+            func.show_tasks("in-progress")
+        elif args.filter == "done":
+            func.show_tasks("done")
+        else:
+            func.show_tasks()
 
 
+if __name__ == "__main__":
+    main()

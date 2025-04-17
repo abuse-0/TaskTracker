@@ -10,7 +10,7 @@ def create_json():
             json.dump([], f)
 
 
-def add_task(description: str) -> None:
+def add_task(description: str):
     id = give_id()
 
     data = {
@@ -35,44 +35,29 @@ def add_task(description: str) -> None:
     
 
 def give_id() -> int:
-    """
-    Check file exist
-    if not exist: create new file and return 0
-    if exist: return last id+1
-    """
     with open('data.json') as f:
         current_data = json.load(f)
 
         if current_data == []:
-            return 0
+            return 1
         else:
             return current_data[-1]["id"] + 1
         
 
-def update_task(id, description) -> None:
-    """
-    - id != int: error: id is not int
-    - id not exist: error: id is not exist
-
-    update task
-    """
+def update_task(id:int, description:str):
     with open('data.json') as f:
         current_data = json.load(f)
 
     flag = "not found"
 
-    try:
-        for task in current_data:
-            if task["id"] == int(id):
-                task["description"] = description
-                task["updatedAt"] = strftime("%Y-%m-%d %H:%M:%S")
-                flag = "found"
+    for task in current_data:
+        if task["id"] == int(id):
+            task["description"] = description
+            task["updatedAt"] = strftime("%Y-%m-%d %H:%M:%S")
+            flag = "found"
 
-        if flag == "not found":
-            print("task with this id is not exist")
-            return
-    except ValueError:
-        print("error: id is not int")
+    if flag == "not found":
+        print("task with this id is not exist")
         return
 
     result = current_data
@@ -83,7 +68,7 @@ def update_task(id, description) -> None:
     print(f"Task updated successfully (ID: {id}, DESCRIPTION: {description})")
 
 
-def delete_task(id: int) -> None:
+def delete_task(id: int):
     with open('data.json') as f:
         current_data = json.load(f)
 
@@ -132,11 +117,11 @@ def change_task_status(id: int, status: str):
     print(f"Task status updated successfully (ID: {id}, STATUS: {status})")
 
 
-def show_tasks(filter):
+def show_tasks(filter:str=None):
     with open('data.json') as f:
         current_data = json.load(f)
     
-    if filter == "":
+    if filter == None:
         for task in current_data:
             print(task)
     elif filter == "todo":

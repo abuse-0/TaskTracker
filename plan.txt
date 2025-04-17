@@ -28,11 +28,11 @@ https://www.youtube.com/watch?v=792UnrSxD6w
     list todo
     list in-progress
 
-[I can't] review with oop(data in add_task it's state) use class Task and class TaskManager, that's all
+[?] review with oop(data in add_task it's state) use class Task and class TaskManager, that's all
 
 [x] instead of --add i want write add
 
-[] Вместо python3 main.py add "Buy groceries" я хочу вводить task-cli add "Buy groceries"
+[x] Вместо python3 main.py add "Buy groceries" я хочу вводить task-cli add "Buy groceries"
 
-[] в конце на гит дропни, как ваще воркает это
+[x] в конце на гит дропни, как ваще воркает это
 
